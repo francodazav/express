@@ -1,7 +1,8 @@
-const express = require("express");
-const crypto = require("node:crypto");
-const movies = require("./movies.json");
-const { validateMovie, validatePartialMovie } = require("./movieScheme");
+import express, { json } from "express";
+import { randomUUID } from "node:crypto";
+import movies from "./movies.json" with { type: "json" };
+import { validateMovie, validatePartialMovie } from "./movieScheme.js";
+import { assert } from "node:console";
 const app = express();
 
 app.disable("x-powered-by");
@@ -15,7 +16,7 @@ const ACEPTEP_ORIGINS = [
   "http:movies.com",
 ];
 
-app.use(express.json()); // Este middleware sirve para que lo que voy a usar en el POST ya esté guardado en el req.body
+app.use(json()); // Este middleware sirve para que lo que voy a usar en el POST ya esté guardado en el req.body
 
 app.get("/", (req, res) => {
   const origin = req.headers.origin;
@@ -64,7 +65,7 @@ app.post("/movies", (req, res) => {
     return res.status(400).json({ message: " Error" }); //Status 400 es una bad request es decir que el cliente intento pedir o enviar algo que es invalido
   }
   const newMovie = {
-    id: crypto.randomUUID(),
+    id: randomUUID(),
     ...result.data,
   };
   movies.push(newMovie);
@@ -110,4 +111,4 @@ app.options("/movies/:id", (req, res) => {
 //el option me sirve en el caso de que quiera hacer un delete/patch/put
 //para hacer el cors
 
-module.exports = app;
+export default app;

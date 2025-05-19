@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module">
+      fetch("http://localhost:3000/movies")
+        .then((res) => res.json())
+        .then((movies) => {
+          console.log(movies);
+          const html = movies
+            .map((movie) => {
+              return `<article data-id="${movie.id}">
+                <h2>${movie.title}<h2>
+                <p>${movie.director}</p>
+                <img src="${movie.poster}" alt=${movie.title}/>
+                </article>`;
+            })
+            .join("");
+          document.querySelector("main").innerHTML = html;
+        });
+    </script>
+    <style>
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <main></main>
+  </body>
+</html>

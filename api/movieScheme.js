@@ -1,4 +1,4 @@
-const z = require("zod");
+import z from "zod";
 
 const movieScheme = z.object({
   title: z.string({
@@ -28,17 +28,12 @@ const movieScheme = z.object({
   duration: z.number().int().min(0),
 });
 
-function validateMovie(input) {
+export function validateMovie(input) {
   return movieScheme.safeParse(input);
 }
 
-function validatePartialMovie(input) {
+export function validatePartialMovie(input) {
   return movieScheme.partial().safeParse(input);
   // partial() lo que hace es que todo lo que esta en el schema sea opcional
   // es decir que solo lo que voy a pasar lo va a validar y lo va a cambiar
 }
-
-module.exports = {
-  validateMovie,
-  validatePartialMovie,
-};
