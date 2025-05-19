@@ -21,6 +21,10 @@ const ACEPTEP_ORIGINS = [
 app.use(express.json()); // Este middleware sirve para que lo que voy a usar en el POST ya esté guardado en el req.body
 
 app.get("/", (req, res) => {
+  const origin = req.headers("origin");
+  if (ACEPTEP_ORIGINS.includes(origin) || !origin) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
   res.json({ message: "hola mundo" });
 });
 
@@ -46,6 +50,10 @@ app.get("/movies", (req, res) => {
 });
 
 app.get("/movies/:title", (req, res) => {
+  const origin = req.headers("origin");
+  if (ACEPTEP_ORIGINS.includes(origin) || !origin) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
   const { title } = req.params;
   const movie = movies.find((movie) => movie.title === title);
   if (movie) return res.json(movie);
