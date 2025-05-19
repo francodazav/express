@@ -1,10 +1,7 @@
 const express = require("express");
 const crypto = require("node:crypto");
-const movies = require("./movies.json");
-const {
-  validateMovie,
-  validatePartialMovie,
-} = require("../clase3/movieScheme");
+const movies = require("../movies.json");
+const { validateMovie, validatePartialMovie } = require("./movieScheme");
 const app = express();
 
 app.disable("x-powered-by");
