@@ -113,6 +113,4 @@ app.options("/movies/:id", (req, res) => {
 //el option me sirve en el caso de que quiera hacer un delete/patch/put
 //para hacer el cors
 
-app.listen(PORT, () => {
-  console.log("its running");
-});
+module.exports = app;
