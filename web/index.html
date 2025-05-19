@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script type="module">
+      const main = document.getElementById("main-page");
       fetch("http://localhost:3000/movies")
         .then((res) => res.json())
         .then((movies) => {
@@ -18,7 +19,7 @@
                 </article>`;
             })
             .join("");
-          document.querySelector("main").innerHTML = html;
+          main.innerHTML = html;
         });
     </script>
     <style>
@@ -29,8 +30,6 @@
     </style>
   </head>
   <body>
-    <main>
-      <h1>HOLAA</h1>
-    </main>
+    <main id="main-page"></main>
   </body>
 </html>
